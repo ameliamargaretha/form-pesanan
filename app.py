@@ -127,8 +127,11 @@ def main():
         st.write(df)
         df.fillna("none", inplace=True)
         p_db.insert_many(df.to_dict("records")) # potential trouble here
-        pd.DataFrame(list(p_db.find({}, {'_id':0}))).to_csv('temp.csv')
+        temp_df = pd.DataFrame(list(p_db.find({}, {'_id':0})))
+        temp_df.drop_duplicates(inplace=True)
+        temp_df.to_csv('temp.csv')
         send_email('./temp.csv')
+        del temp_df
         os.system('rm ./temp.csv')
         st.warning("anda dapat menutup tab ini")
 
