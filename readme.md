@@ -1,5 +1,7 @@
 TODO:
 - [ ] refresh page if finished
+- [ ] setup env variable in mongodb
+- [ ] setup procfile for deploying
 - [ ] konek ke heroku
 - [ ] bikin script puller dari mongodb ke csv untuk local
 
