@@ -1,7 +1,8 @@
 TODO:
 - [ ] refresh page if finished
-- [ ] setup env variable in mongodb
-- [ ] setup procfile for deploying
+- [x] setup env variable in mongodb
+- [x] setup procfile for deploying
+	- used a [buildpack](https://github.com/moneymeets/python-poetry-buildpack), so i don't have to generaete requirements txt everytime i push heroku
 - [ ] konek ke heroku
 - [ ] bikin script puller dari mongodb ke csv untuk local
 
