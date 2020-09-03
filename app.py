@@ -1,7 +1,9 @@
 import datetime
+import os
 import streamlit as st
 import pandas as pd
 from dataclasses import dataclass
+from pull import send_email
 from connect import p_db
 
 PRODUK = sorted([x.strip() for x in open("./nama_produk.txt").readlines()])
@@ -124,7 +126,10 @@ def main():
         st.write("konfirmasi pembelian produk")
         st.write(df)
         df.fillna("none", inplace=True)
-        p_db.insert_many(df.to_dict("records")) # potential
+        p_db.insert_many(df.to_dict("records")) # potential trouble here
+        pd.DataFrame(list(p_db.find({}, {'_id':0}))).to_csv('temp.csv')
+        send_email('./temp.csv')
+        os.system('rm ./temp.csv')
         st.warning("anda dapat menutup tab ini")
 
 
