@@ -1,5 +1,4 @@
 import datetime
-import os
 import streamlit as st
 import pandas as pd
 from dataclasses import dataclass
@@ -124,15 +123,12 @@ def main():
         df["nomor_telepon"] = code
         df["order_by"] = order_by
         st.write("konfirmasi pembelian produk")
-        st.write(df)
         df.fillna("none", inplace=True)
-        p_db.insert_many(df.to_dict("records")) # potential trouble here
-        temp_df = pd.DataFrame(list(p_db.find({}, {'_id':0})))
-        temp_df.drop_duplicates(inplace=True)
-        temp_df.to_csv('temp.csv')
-        send_email('./temp.csv')
+        st.write(df)
+        p_db.insert_many(df.to_dict("records"))  # potential trouble here
+        temp_df = pd.DataFrame(list(p_db.find({}, {"_id": 0})))
+        send_email(temp_df, "/temp.csv")
         del temp_df
-        os.system('rm ./temp.csv')
         st.warning("anda dapat menutup tab ini")
 
 
